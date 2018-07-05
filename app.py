@@ -65,11 +65,13 @@ def upload():
         process_zip_file(destination, filename, int(formato))
         global good_files, bad_files, duplicados, insertados
         respuesta = {'file': filename, 'good_files': {'lista_detalle': good_files, 'total_registros_procesados': total_registros_procesados, 'total_registros_insertados': total_registros_insertados,
-                     'total_registros_excluidos': total_registros_excluidos}, 'bad_files': bad_files, 'no_procesados': len(bad_files)}
+                     'total_registros_excluidos': total_registros_excluidos}, 'bad_files': bad_files, 'no_procesados': len(bad_files), 'si_procesados': len(good_files)}
         os.remove(destination)
         return jsonify(respuesta)
     if tipo_archivo == "excel":
         #global duplicados
+        global status_indiv_file
+        status_indiv_file = "OK"
         reg_procesados, reg_insertados, reg_excluidos = process_excel_file(destination, filename, int(formato))
         respuesta = {'filename': filename, 'status': status_indiv_file, 'registros_procesados': reg_procesados, 'registros_insertados': reg_insertados,
                      'registros_excluidos': reg_excluidos, 'registros_duplicados_detalle': duplicados, 'registros_insertados_detalle': insertados}
@@ -131,8 +133,9 @@ def process_excel_file(path_excel_file, filename, formato):
         save_file_upload_error(filename, str(e))
         indice = str(e).find('attribute')
         global msg_error_column, status_indiv_file
-        error = msg_error_column + str(e)[indice + 9:]
-        status_indiv_file = "ERROR: " + error
+        nombre_campo = cabecera_a_texto(str(e)[indice + 10:])
+        error = msg_error_column + ' ' + nombre_campo
+        status_indiv_file = error
         return 0, 0, 0
 
 # Funcion donde se establecen los campos que seran guardados en la base de datos
@@ -244,6 +247,13 @@ def set_formato_excel(formato):
 def dar_formato_fecha(fecha_raw):
     return fecha_raw[:4] + '-' + fecha_raw[4:6] + '-' + fecha_raw[6:]
 
+def cabecera_a_texto(cabecera):
+    texto = cabecera
+    if(cabecera == "'_1'"):
+        texto = "'COD.'"
+    if(cabecera == "'_13'"):
+        texto = "'DEVOL/TRANSF.'"
+    return texto
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
