@@ -1,0 +1,21 @@
+formato_one = {'MONEDA': str,
+                 'DEPENDENCIA': str, 'CONCEP': str,
+                 'a': str,
+                 'b': str, 'NUMERO': str, 'CODIGO': str,
+                 'NOMBRE': str, 'IMPORTE': float,
+                 'CARNET': str, 'AUTOSEGURO': str,
+                 'AVE': str,
+                 'DEVOL/TRANSF.': str,
+                 'OBSERVACIONES': str,
+                 'FECHA': str}
+
+formato_two = {'COD.': str,
+                 'DEPENDENCIA': str, 'CONCEP': str,
+                 'a': str,
+                 'b': str, 'NUMERO': str, 'CODIGO': str,
+                 'NOMBRE': str, 'IMPORTE': float,
+                 'CARNET': str, 'AUTOSEGURO': str,
+                 'AVE': str,
+                 'DEVOL/TRANSF.': str,
+                 'OBSERVACIONES': str,
+                 'FECHA': str}
