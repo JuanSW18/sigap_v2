@@ -31,7 +31,15 @@ msg_error_column = 'El formato del excel no contiene la columna'
 # navegador a la direccion ip:5000
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return '<h1>Team Alphazero - Módulo Carga</h1>' \
+           '<h3>Integrantes:</h3>' \
+           '<ul>' \
+           '<li>Caballero Fonseca, Raul Omar <b>(Backend)</b> </li>' \
+           '<li> Ccopa Mamani, Andres Junior <b>(Frontend)</b> </li>' \
+           '<li>Caillahua Castillo, Maria Katherine <b>(QA)</b> </li>' \
+           '<li>Diaz Alvarran, Jorge <b>(DBA)</b> </li>' \
+           '<li>Eneque Pisfil, Juan Rolando <b>(Backend)</b> </li>' \
+           '</ul>'
 
 # Metodo POST que será usado desde el FRONT
 # para enviar el archivo (excel o zip) a procesar
@@ -80,7 +88,8 @@ def upload():
 
 # Funcion para la conexion con la base de datos
 def connect_database():
-    return ps.connect(host="159.65.230.188", port=5432, dbname="tcs2", user="postgres", password="sigap789")
+    #return ps.connect(host="159.65.230.188", port=5432, dbname="tcs2", user="postgres", password="sigap789")
+	return ps.connect(host="localhost", port=5432, dbname="tcs", user="postgres", password="1234")
 
 # Funcion para procesar archivos tipo zip
 def process_zip_file(path_zip_file, filename, formato):
