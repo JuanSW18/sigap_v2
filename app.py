@@ -80,8 +80,7 @@ def upload():
 
 # Funcion para la conexion con la base de datos
 def connect_database():
-    return ps.connect(host="localhost", port=5432, dbname="tcs", user="postgres", password="1234")
-    #return ps.connect(host="159.65.230.188", port=5432, dbname="tcs2", user="postgres", password="sigap789")
+    return ps.connect(host="159.65.230.188", port=5432, dbname="tcs2", user="postgres", password="sigap789")
 
 # Funcion para procesar archivos tipo zip
 def process_zip_file(path_zip_file, filename, formato):
